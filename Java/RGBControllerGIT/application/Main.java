@@ -51,7 +51,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			connect("COM5");
-			primaryStage.setTitle("RGB Control");
+			primaryStage.setTitle("RGB Controller");
 			Scene scene = new Scene(new Panel(), 250, 380);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
