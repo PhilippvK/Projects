@@ -1,0 +1,6 @@
+4. Bit setzen: P0 |= (0b1 << 4)
+3. Bit loeschen: P0 &= ~(0b1 << 3)
+1. und letztes Bit setzen: P0 |= 0b10000001;
+5. Bit invertieren: P0 ^= 0b00100000
+um 4 nach links schieben: P0 <<= 4
+um 3 nach rechts schieben: P0 >>= 3
