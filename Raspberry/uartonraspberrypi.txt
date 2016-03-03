@@ -1,0 +1,2 @@
+ sudo minicom -b 9600 -D /dev/ttyAMA0 -o
+tail -f /var/log/lighttpd/error.log
