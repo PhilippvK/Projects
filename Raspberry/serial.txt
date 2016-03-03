@@ -1,0 +1,4 @@
+search UART
+dmesg | grep tty
+Console: minicom, screen
+Python: python-serial

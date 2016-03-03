@@ -1,0 +1,9 @@
+timezone:
+sudo dpkg-reconfigure tzdata
+
+sync clock:
+sudo apt-get purge ntp
+sudo apt-get install ntpdate
+sudo crontab -e
+@reboot ntpdate -s 0.de.pool.ntp.org
+0 */6 * * * ntpdate -s 0.de.pool.ntp.org

@@ -1,0 +1,45 @@
+Which is better depends on what you are defining.
+
+The #define construct is a compiler pre-processor directive. The value is substituted for the name, wherever the name occurs in the source code. So, something like:
+
+Code: [Select]
+
+#define ledPin 13
+digitalWrite(ledPin, HIGH);
+
+
+looks to the compiler just like
+Code: [Select]
+
+digitalWrite(13, HIGH);
+
+
+
+Whether that is better than
+Code: [Select]
+
+const int ledPin=13;
+digitalWrite(ledPin, HIGH);
+
+
+or not would require looking at the assembly code that was produced, which I am not qualified to do.
+
+There are advantages to using the const structure.
+Code: [Select]
+
+if(ledPin = 13)
+{
+}
+
+
+will fail to compile, because ledPin is const. It can't be changed after being assigned a value, so the compiler will display an error message that will, hopefully) tell you that you should have used ==.
+
+If you are doing something like this:
+Code: [Select]
+
+#define HelloMessage "Welcome to the wonderful world of Arduino. Enjoy your stay"
+
+
+and using HelloMessage in 25 places, you'll get 25 copies of the string in SRAM. A const char array would result in only one copy.
+
+On the other hand, there are conventions (not always followed) that call for variable names to be camelCase, and #define names to be ALLCAPITALLETTERS, so that constants can be recognized as such.
