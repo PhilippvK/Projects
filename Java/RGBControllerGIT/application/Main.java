@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,10 +48,36 @@ public class Main extends Application {
 
 	String input = "";
 
+	public String portPopup() {
+		List<String> dialogData = UARTControl.getPorts();
+		if (dialogData.size() == 0) {
+			return null;
+		}
+		ChoiceDialog<String> dialog = new ChoiceDialog<String>(dialogData.get(0), dialogData);
+		dialog.setTitle("Serial Ports");
+		dialog.setHeaderText("Please Select Serial Port:");
+
+		Optional<String> result = dialog.showAndWait();
+		String selected = "none";
+
+		if (result.isPresent()) {
+			selected = result.get();
+		}
+
+		if (!selected.equals("none")) {
+			return selected;
+			
+		} else {
+			System.out.println("uups");
+			return null;
+		}
+	}
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			connect("COM5");
+			connect(portPopup());
+			
 			primaryStage.setTitle("RGB Controller");
 			Scene scene = new Scene(new Panel(), 250, 380);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
