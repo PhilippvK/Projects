@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,10 +48,43 @@ public class Main extends Application {
 
 	String input = "";
 
+	public boolean select() {
+		List<String> choices = new ArrayList<>();
+		
+		Enumeration<CommPortIdentifier> c = CommPortIdentifier.getPortIdentifiers();
+		
+		while (c.hasMoreElements()) {
+			CommPortIdentifier p = (CommPortIdentifier) c.nextElement();
+			choices.add(p.getName());
+			
+		}
+
+		ChoiceDialog<String> dialog = new ChoiceDialog<>("None", choices);
+		dialog.setTitle("Choose Device");
+		dialog.setHeaderText("Please select a Serial Port");
+		dialog.setContentText("9600bps");
+
+		// Traditional way to get the response value.
+		Optional<String> result = dialog.showAndWait();
+		if (result.isPresent()){
+		    System.out.println("Your choice: " + result.get());
+		    if(!result.get().equals("None")){
+		    	connect(result.get());
+			    return true;
+		    } else {
+		    	return false;
+			}
+		    
+		}
+		return false;
+		
+
+		
+	}
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			connect("COM5");
+			select();
 			primaryStage.setTitle("RGB Controller");
 			Scene scene = new Scene(new Panel(), 250, 380);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
