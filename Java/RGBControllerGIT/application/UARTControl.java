@@ -3,6 +3,9 @@ package application;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Enumeration;
 
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
@@ -11,7 +14,21 @@ import gnu.io.SerialPort;
 public class UARTControl {
 	public Thread t;
 	
+	public static ArrayList<String> getPorts(){
+		Enumeration<CommPortIdentifier> ports = CommPortIdentifier.getPortIdentifiers();
+		ArrayList<String> list = new ArrayList<String>();
+		while (ports.hasMoreElements()) {
+			CommPortIdentifier commPortIdentifier = (CommPortIdentifier) ports.nextElement();
+			System.out.println(commPortIdentifier.getName());
+			list.add(commPortIdentifier.getName());
+		}
+		String[] l = new String[list.size()];
+		return list;
+	}
+	
 	public UARTControl(String portName) throws Exception{
+		
+		
 		CommPortIdentifier portIdentifier = CommPortIdentifier.getPortIdentifier(portName);
 		if (portIdentifier.isCurrentlyOwned()) {
 			System.out.println("Error: Port is currently in use");
