@@ -12,7 +12,7 @@ import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
 
 public class UARTControl {
-	public Thread t1;
+	public Thread t;
 	
 	public static ArrayList<String> getPorts(){
 		Enumeration<CommPortIdentifier> ports = CommPortIdentifier.getPortIdentifiers();
@@ -44,8 +44,8 @@ public class UARTControl {
 				InputStream in = serialPort.getInputStream();
 				OutputStream out = serialPort.getOutputStream();
 
-				t1 = new Thread(new SerialReader(in));
-				t1.start();
+				t = new Thread(new SerialReader(in));
+				t.start();
 				
 				out.write('g');
 				Thread.sleep(10);
