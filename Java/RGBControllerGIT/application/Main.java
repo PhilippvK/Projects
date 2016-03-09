@@ -9,10 +9,14 @@ import java.io.OutputStream;
 import java.io.Writer;
 import java.util.ArrayList;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.util.Arrays;
 =======
 import java.util.Enumeration;
 >>>>>>> refs/remotes/origin/New-Branch
+=======
+import java.util.Enumeration;
+>>>>>>> refs/remotes/origin/master
 import java.util.List;
 import java.util.Optional;
 
@@ -53,6 +57,7 @@ public class Main extends Application {
 	String input = "";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public String portPopup() {
 		List<String> dialogData = UARTControl.getPorts();
 		if (dialogData.size() == 0) {
@@ -84,6 +89,8 @@ public class Main extends Application {
 			connect(portPopup());
 			
 =======
+=======
+>>>>>>> refs/remotes/origin/master
 	public boolean select() {
 		List<String> choices = new ArrayList<>();
 		
@@ -121,7 +128,10 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			select();
+<<<<<<< HEAD
 >>>>>>> refs/remotes/origin/New-Branch
+=======
+>>>>>>> refs/remotes/origin/master
 			primaryStage.setTitle("RGB Controller");
 			Scene scene = new Scene(new Panel(), 250, 380);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
